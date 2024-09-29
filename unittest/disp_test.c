@@ -4677,7 +4677,7 @@ int main(int argc, char **argv)
     region.iHeigh = 16;
 
     ptBuffer = GetDisplayBuffer();
-    FlushDisplayRegion(& region, ptBuffer);
+    FlushDisplayRegion(&region, ptBuffer);
 
 	return 0;	
 }
