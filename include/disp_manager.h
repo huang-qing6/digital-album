@@ -25,8 +25,10 @@ void RegisterDisplay(PDispOpr pyDispOpr);
 void DisplayInit(void);
 int SelectDefaultDisplay(char *name);
 int InitDefaultDisplay(void);
+void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor);
 void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwcolor);
-int PutPixel(int x, int y, unsigned int dwcolor);
+void DrawRegion(PRegion ptRegion, unsigned int dwColor);
+int PutPixel(int x, int y, unsigned int dwColor);
 int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff);
 PDispBuff GetDisplayBuffer();
 

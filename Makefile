@@ -26,10 +26,12 @@ export TOPDIR
 
 TARGET := test
 
+obj-y += unittest/
 obj-y += part1_display/
 obj-y += part2_input/
 obj-y += part3_font/
-obj-y += unittest/
+obj-y += part4_ui/
+
 
 
 all : start_recursive_build $(TARGET)
