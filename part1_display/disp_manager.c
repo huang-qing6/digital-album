@@ -9,6 +9,26 @@ static DispBuff g_tDispBuff; // 储存了显存地址
 static int line_witdh;
 static int pixel_witdh;
 
+void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwcolor){
+    int i, j, p, q;
+    int x = ptFontBitMap->tRegion.iLeftUpX;
+    int y = ptFontBitMap->tRegion.iLeftUpY;
+    int x_max = x + ptFontBitMap->tRegion.iWidth;
+    int y_max = y + ptFontBitMap->tRegion.iHeigh;
+    int width = ptFontBitMap->tRegion.iWidth;
+    unsigned char *buffer = ptFontBitMap->pucBuffer;
+
+    for(j = y, q = 0; j < y_max; j++, q++){
+        for(i = x, p = 0; i < x_max; i++, p++){
+            if(i < 0 || j < 0 || i >= g_tDispBuff.iXres || j >= g_tDispBuff.iYres)
+                continue;
+
+            if(buffer[q * width + p])
+                PutPixel(i, j, dwcolor);
+        }
+    }
+}
+
 int PutPixel(int x, int y, unsigned int dwcolor){
     unsigned char *pen_8 = (unsigned char *)g_tDispBuff.buff + y * line_witdh + x * pixel_witdh;
     unsigned short *pen_16;

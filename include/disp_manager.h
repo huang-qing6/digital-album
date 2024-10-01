@@ -1,9 +1,8 @@
 #ifndef _DISP_MANAGER_H
 #define _DISP_MANAGER_H
 
-#ifndef NULL
-#define NULL (void*)0
-#endif
+#include "common.h"
+#include "font_manager.h"
 
 typedef struct DispBuff{
     int iXres;
@@ -11,13 +10,6 @@ typedef struct DispBuff{
     int iBpp;
     char *buff;
 }DispBuff, *PDispBuff;
-
-typedef struct Region{
-    int iLeftUpX;
-    int iLeftUpY;
-    int iWidth;
-    int iHeigh;
-}Region, *PRegion;
 
 typedef struct DispOpr{
     char *name;
@@ -28,10 +20,12 @@ typedef struct DispOpr{
     struct DispOpr *ptNext;
 }DispOpr, *PDispOpr;
 
+// disp_manager.c
 void RegisterDisplay(PDispOpr pyDispOpr);
 void DisplayInit(void);
 int SelectDefaultDisplay(char *name);
 int InitDefaultDisplay(void);
+void DrawFontBitMap(PFontBitMap ptFontBitMap, unsigned int dwcolor);
 int PutPixel(int x, int y, unsigned int dwcolor);
 int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff);
 PDispBuff GetDisplayBuffer();
