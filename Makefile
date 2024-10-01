@@ -31,6 +31,7 @@ obj-y += part1_display/
 obj-y += part2_input/
 obj-y += part3_font/
 obj-y += part4_ui/
+obj-y += part5_page/
 
 
 
