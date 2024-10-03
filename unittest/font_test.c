@@ -4686,7 +4686,7 @@ int main(int argc, char **argv)
 	font_size  = strtol(argv[4], NULL, 0);
 	
 		
-	DisplayInit();
+	DisplaySystemRegister();
 
 	SelectDefaultDisplay("fb");
 
@@ -4694,7 +4694,7 @@ int main(int argc, char **argv)
 
 	ptBuffer = GetDisplayBuffer();
 
-	FontsRegister();
+	FontSystemRegister();
 	
 	error = SelectAndInitFont("freetype", argv[1]);
 	if (error)

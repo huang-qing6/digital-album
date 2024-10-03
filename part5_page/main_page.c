@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "page_manager.h"
 #include "config.h"
@@ -18,6 +19,10 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
     char name[100];
     char status[100];
     char *strButton;
+    char *command_status[3] = {"err", "ok", "precent"};
+    int command_status_index= 0;
+    char command[1000];
+    PItemCfg ptItemCfg;
 
     strButton = ptButton->name;
 
@@ -33,6 +38,7 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
         if (ptButton->status)
         {
             dwColor = BUTTON_PRESSED_COLOR;
+            command_status_index = 1;
         }
     }
     /* 2 for net event */
@@ -40,14 +46,19 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
     {
         /* 2.1 change button color by str,  */
         sscanf(ptInputEvent->str, "%s %s", name, status);
-        if (strcmp(status, "ok") == 0)
+        if (strcmp(status, "ok") == 0){
             dwColor = BUTTON_PRESSED_COLOR;
-        else if (strcmp(status, "err") == 0)
+            command_status_index = 1;
+        }
+        else if (strcmp(status, "err") == 0){
             dwColor = BUTTON_DEFAULT_COLOR;
+            command_status_index = 0;
+        }   
         else if (status[0] >= '0' && status[0] <= '9')
         {
             dwColor = BUTTON_PERCENT_COLOR;
             strButton = status;
+            command_status_index = 2;
         }
         else
             return -1;
@@ -66,6 +77,13 @@ static int MainPageOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInp
     /* flush to lcd/web */
     FlushDisplayRegion(&ptButton->tRegion, ptDispBuff);
 
+    /* run command */
+    ptItemCfg = GetItemCfgByName(ptButton->name);
+    if(ptItemCfg->command[0] != '\0'){
+        sprintf(command, "%s %s", ptItemCfg->command, command_status[command_status_index]);
+        system(command); // 进行系统调用
+    }
+    
     return 0;
 }
 

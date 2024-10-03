@@ -4,7 +4,7 @@
 #include "common.h"
 
 #define ITEMCFG_MAX_NUM 30
-#define CFG_FILE "/etc/test_gui/gui.config"
+#define CFG_FILE "/etc/test_gui/gui.conf"
 
 typedef struct ItemCfg{
     int index;

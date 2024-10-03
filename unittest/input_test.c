@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     int ret;
     InputEvent event;
 
-    InputInit();
+    InputSystemRegister();
     InputDeviceInit();
 
     while(1){

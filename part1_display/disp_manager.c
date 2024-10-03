@@ -10,8 +10,6 @@ static int line_witdh;
 static int pixel_witdh;
 
 void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor){
-  	int n = strlen(name);
-	int iFontSize = ptRegion->iWidth / n / 2;
 	FontBitMap tFontBitMap;
     RegionCartesian tRegionCar;
 
@@ -188,9 +186,9 @@ int FlushDisplayRegion(PRegion ptRegion, PDispBuff ptDispBuff)
 /**调用底层初始化
  *
  */
-void DisplayInit()
+void DisplaySystemRegister()
 {
-    extern void FramebufferInit(void);
-    FramebufferInit();
+    extern void FramebufferRegister(void);
+    FramebufferRegister();
     // WebInit();
 }

@@ -22,7 +22,7 @@ typedef struct DispOpr{
 
 // disp_manager.c
 void RegisterDisplay(PDispOpr pyDispOpr);
-void DisplayInit(void);
+void DisplaySystemRegister(void);
 int SelectDefaultDisplay(char *name);
 int InitDefaultDisplay(void);
 void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor);

@@ -11,30 +11,28 @@
 
 #include "disp_manager.h"
 #include "font_manager.h"
-#include "ui.h"
+#include "page_manager.h"
+#include "input_manager.h"
 
 int main(int argc, char **argv)
 {
-	PDispBuff ptBuffer;
 	int error;
-	Button tButton;
-	Region tRegion;
+	
+    if(argc != 2){
+        printf("Usage: %s <font_type>\n", argv[0]);
+    }
 
-	if(argc != 2){
-		printf("usage %s <font>\n",argv[0]);
-		return -1;
-	}
-
+    /* Disp system init */
 	DisplaySystemRegister();
-
 	SelectDefaultDisplay("fb");
-
 	InitDefaultDisplay();
 
-	ptBuffer = GetDisplayBuffer();
+    /* Input system init */
+    InputSystemRegister();
+    InputDeviceInit();
 
+    /* Font system init */
 	FontSystemRegister();
-	
 	error = SelectAndInitFont("freetype", argv[1]);
 	if (error)
 	{
@@ -42,18 +40,11 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	tRegion.iLeftUpX = 200;
-	tRegion.iLeftUpY = 200;
-	tRegion.iWidth = 300;
-	tRegion.iHeigh = 100;
-	InitButton(&tButton, &tRegion, "test", NULL, NULL);
+    /* Page system init */
+	PagesRegister();
 
-	tButton.OnDraw(&tButton, ptBuffer);
-	//模拟点击
-	while(1){
-		tButton.OnPressed(&tButton, ptBuffer, NULL);
-		sleep(2);
-	}
-
+    /* start main GUI */
+    Page("main")->Run(NULL);
+	
 	return 0;	
 }

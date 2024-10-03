@@ -22,7 +22,7 @@ void RegisterFont(PFontOpr ptFontOpr){
     g_ptFonts = ptFontOpr;
 }
 
-void FontsRegister(){
+void FontSystemRegister(){
     extern void FreetypeRegister(void);
     FreetypeRegister();
 }

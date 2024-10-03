@@ -11,7 +11,6 @@ static PInputDevice g_InputDevs = NULL;
 static pthread_mutex_t g_tMutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t g_tConVar = PTHREAD_COND_INITIALIZER;
 
-#pragma region ringbuffer
 #define BUFFER_LEN 20
 static int g_iRead = 0;
 static int g_iWrite = 0;
@@ -41,7 +40,6 @@ static int GetInputEventFromBuffer(PInputEvent ptInputEvent){
 
     return 0;
 }
-#pragma endregion
 
 void RegisterInputDevice(PInputDevice pInputDevice){
     pInputDevice->ptNext = g_InputDevs;
@@ -49,7 +47,7 @@ void RegisterInputDevice(PInputDevice pInputDevice){
 }
 
 /* init */
-void InputInit(){
+void InputSystemRegister(){
     /* register touchscreen */
     extern void TouchscreenRegister(void);
     TouchscreenRegister();
@@ -77,6 +75,7 @@ static void *input_recv_thread_func(void *arg){
             pthread_mutex_unlock(&g_tMutex);            
         }
     }
+    return NULL;
 }
 
 void InputDeviceInit(){

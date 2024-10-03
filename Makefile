@@ -32,7 +32,7 @@ obj-y += part2_input/
 obj-y += part3_font/
 obj-y += part4_ui/
 obj-y += part5_page/
-obj-y += part6_business/
+obj-y += part6_main/
 obj-y += part7_config/
 
 

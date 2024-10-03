@@ -29,7 +29,7 @@ typedef struct InputDevice{
 
 
 void RegisterInputDevice(PInputDevice pyInputDevice);
-void InputInit(void);
+void InputSystemRegister(void);
 void InputDeviceInit(void);
 int GetInputEvent(PInputEvent ptInputEvent);
 

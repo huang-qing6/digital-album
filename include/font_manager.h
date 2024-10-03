@@ -23,7 +23,7 @@ typedef struct FontOpr{
 
 // font_manager.c
 void RegisterFont(PFontOpr g_ptFonts);
-void FontsRegister(void);
+void FontSystemRegister(void);
 int SelectAndInitFont(char *aFontOprName, char *aFontFileName);
 int SetFontSize(int iFontSize);
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap);
