@@ -17,6 +17,7 @@ typedef struct FontOpr{
     int (*FontInit)(char *aFileName);
     int (*SetFontSize)(int iFontSize);
     int (*GetFontBitMap)(unsigned int dwCode, PFontBitMap ptFontBitMap);
+    int (*GetStringRegionCar)(char *str, PRegionCartesian ptRegionCar);
     struct FontOpr *ptNext;
 }FontOpr, *PFontOpr;
 
@@ -26,5 +27,6 @@ void FontsRegister(void);
 int SelectAndInitFont(char *aFontOprName, char *aFontFileName);
 int SetFontSize(int iFontSize);
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap);
+int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar);
 
 #endif

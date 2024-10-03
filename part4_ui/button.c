@@ -23,6 +23,7 @@ static int DefaultOnPressed(struct Button *ptButton, PDispBuff ptDispBuff, PInpu
     DrawRegion(&ptButton->tRegion, dwColor);
 
     /* 居中写字 */
+    SetFontSize(ptButton->iFontSize);
     DrawTextInRegionCentral(ptButton->name, &ptButton->tRegion, BUTTON_TEXT_COLOR);
 
     /* flush to lcd/web */
@@ -37,7 +38,8 @@ void InitButton(PButton ptButton, PRegion ptRegion, char *name,
                 ONPRESSED_FUNC OnPressed){
     ptButton->status = 0;
     ptButton->name = name;
-    ptButton->tRegion = *ptRegion;
+    if(ptRegion)
+        ptButton->tRegion = *ptRegion;
     ptButton->OnDraw = OnDraw ? OnDraw : DefaultOnDraw;
     ptButton->OnPressed = OnPressed ? OnPressed : DefaultOnPressed;
 }

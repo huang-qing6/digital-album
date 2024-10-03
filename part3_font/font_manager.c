@@ -52,3 +52,7 @@ int SetFontSize(int iFontSize){
 int GetFontBitMap(unsigned int dwCode, PFontBitMap ptFontBitMap){
     return g_ptDefaultFontOpr->GetFontBitMap(dwCode, ptFontBitMap);
 }
+
+int GetStringRegionCar(char *str, PRegionCartesian ptRegionCar){
+    return g_ptDefaultFontOpr->GetStringRegionCar(str, ptRegionCar);
+}

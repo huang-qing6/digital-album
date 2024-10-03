@@ -13,19 +13,21 @@ void DrawTextInRegionCentral(char *name, PRegion ptRegion, unsigned int dwColor)
   	int n = strlen(name);
 	int iFontSize = ptRegion->iWidth / n / 2;
 	FontBitMap tFontBitMap;
+    RegionCartesian tRegionCar;
 
 	int iOriginX, iOriginY;
 	int i = 0;
 	int error;
 
-	if (iFontSize > ptRegion->iHeigh)
-		iFontSize =  ptRegion->iHeigh;
+    /* cal outside frame */
+    GetStringRegionCar(name, &tRegionCar);
 
-	iOriginX = (ptRegion->iWidth - n * iFontSize)/2 + ptRegion->iLeftUpX;
-	iOriginY = (ptRegion->iHeigh - iFontSize)/2 + iFontSize + ptRegion->iLeftUpY;
+    /* cal first font region */
 
-	SetFontSize(iFontSize);
+	iOriginX = ptRegion->iLeftUpX + (ptRegion->iWidth - tRegionCar.iWidth)/2 - tRegionCar.iLeftUpX;
+	iOriginY = ptRegion->iLeftUpY + (ptRegion->iHeigh - tRegionCar.iHeigh)/2 + tRegionCar.iLeftUpY;
 
+    /* draw */
 	while (name[i]){
 		/* get bitmap */
 		tFontBitMap.iCurOriginX = iOriginX;
